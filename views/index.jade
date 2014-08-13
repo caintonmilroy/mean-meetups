@@ -5,5 +5,5 @@ block content
     ul
       li(ng-repeat="meetup in meetups") {{meetup.name}}
     form(ng-submit="addMeetup()")
-      input(type="entry", ng-model="name")
+      input(type="entry", ng-model="name", required placeholder="Enter a meetup name")
       input(type="submit", value ="Add a meetup")
