@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-// a comment
+//just comment
 
 // all environments
 app.set('port', process.env.PORT || 3000);

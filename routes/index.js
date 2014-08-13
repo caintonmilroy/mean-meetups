@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Garden Code', author: 'Cainton M' });
+  res.render('index', { title: 'Garden Code', author: 'Cainton M',Year:2014 });
 };

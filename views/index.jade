@@ -1,6 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p Author: #{author}
+  div(ng-app="meetup", ng-controller="meetupController")
+    ul
+      li(ng-repeat="meetup in meetups") {{meetup.name}}
+    form
+      input(type="entry")
+      button Add
