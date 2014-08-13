@@ -4,6 +4,6 @@ block content
   div(ng-app="meetup", ng-controller="meetupController")
     ul
       li(ng-repeat="meetup in meetups") {{meetup.name}}
-    form
-      input(type="entry")
-      button Add
+    form(ng-submit="addMeetup()")
+      input(type="entry", ng-model="name")
+      input(type="submit", value ="Add a meetup")
