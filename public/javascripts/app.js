@@ -1,6 +1,6 @@
 var meetup = angular.module('meetup', ['ngResource', 'ngRoute']);
 
-meetup.factory('MeetupServer', [ function() {	
+meetup.factory('MeetupServer', [ '$resource', function($resource) {	
 	var meetups =  [{name:"Cainton"}, {name:"Milroy"}];
 
 	return { 
