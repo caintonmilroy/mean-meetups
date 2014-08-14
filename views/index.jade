@@ -3,7 +3,7 @@ extends layout
 block content
   div(ng-app="meetup", ng-controller="meetupController")
     ul
-      li(ng-repeat="meetup in meetups") {{meetup.name}}
+      li(ng-repeat="meetup in meetups track by meetup.name") {{meetup.name}}
     form(ng-submit="addMeetup()")
       input(type="entry", ng-model="name", required placeholder="Enter a meetup name")
       input(type="submit", value ="Add a meetup")
