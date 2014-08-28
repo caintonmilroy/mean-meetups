@@ -12,7 +12,9 @@ Testing
 -------
 
 Prerequisites
+
     npm install -g karma-cli
 
 Running tests
+
 	karma start
