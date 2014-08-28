@@ -1,4 +1,4 @@
-var meetup = angular.module('meetup', ['ngResource', 'ngRoute']);
+var meetup = angular.module('MeetupApp', ['ngResource', 'ngRoute']);
 
 meetup.factory('MeetupServer', [ '$resource', function($resource) {	
 	var meetups =  [{name:"Cainton"}, {name:"Milroy"}];
@@ -19,11 +19,11 @@ meetup.factory('MeetupServer', [ '$resource', function($resource) {
 meetup.controller('meetupController',["$scope", "MeetupServer", function($scope, MeetupServer){
 	$scope.meetups = MeetupServer.list();
 
-	$scope.addMeetup = function(){
-		if($scope.name){
-			var meetup = {name:$scope.name};
+	$scope.addMeetup = function(the_name){
+		if(the_name){
+			var meetup = {name: the_name};
 			$scope.meetups.push(meetup);
-			MeetupServer.add(meetup)
+			MeetupServer.add(meetup);
 			$scope.name = "";
 		}
 	};
