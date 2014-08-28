@@ -1,3 +1,13 @@
+var meetupAppMock = angular.module("MeetupAppMock",[]);
+meetupAppMock.factory('MeetupServer', function() {
+	return {
+			list_was_called: 0,
+			list: function() { this.list_was_called++; return []; },
+			add_was_called: 0,
+			add: function() { this.add_was_called++; }
+		};
+});
+
 describe("A working test environment", function() {
 	it("a passing test", function() {
 		expect(true).toBe(true);
@@ -11,20 +21,19 @@ describe("Meetup App", function() {
 	var crtl, scope, mockServer;
 
 	beforeEach(function(){
- 		mockServer = {
-			list_was_called: 0,
-			list: function() { this.list_was_called++; return []; },
-			add_was_called: 0,
-			add: function() { this.add_was_called++; }
-		};
-	});
+		module("MeetupApp");
+		module("MeetupAppMock");
+	
+		inject(function($injector){
+			mockServer = $injector.get("MeetupServer");
+		});
 
-	beforeEach(module("MeetupApp"));
-	beforeEach(inject(function($controller, $rootScope) {
-		scope = $rootScope.$new;
-		ctrl = $controller('meetupController', 
-			{$scope: scope, "MeetupServer": mockServer});
-	}));
+		inject(function($controller, $rootScope) {
+			scope = $rootScope.$new;
+			ctrl = $controller('meetupController', 
+				{$scope: scope, "MeetupServer": mockServer});
+		});
+	});
 
 	it("should have a meetupController", function() {
 		expect(ctrl).toBeDefined();
