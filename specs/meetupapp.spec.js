@@ -1,9 +1,13 @@
-var angular = require('angular');
-var app = require('../public/javascripts/app.js');
-
 describe("Meetup Controller", function() {
+	it("passing test", function() {
+		expect(true).toBe(true);
+	});
+
 	it("failing test", function() {
-		expect(angular).toBeDefined();
 		expect(false).toBe(true);
+	});
+
+	it("can see angular", function() {
+		expect(angular).toBeDefined();
 	});
 });
