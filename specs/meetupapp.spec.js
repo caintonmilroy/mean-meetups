@@ -1,10 +1,13 @@
 var meetupAppMock = angular.module("MeetupAppMock",[]);
+
 meetupAppMock.factory('MeetupServer', function() {
 	return {
-			list_was_called: 0,
 			list: function() { this.list_was_called++; return []; },
+			add: function(meetup) { this.add_was_called++;
+				this.add_was_called_with = meetup; },
+			list_was_called: 0,
 			add_was_called: 0,
-			add: function() { this.add_was_called++; }
+			add_was_called_with: {}
 		};
 });
 
@@ -38,6 +41,7 @@ describe("Meetup App", function() {
 	it("should have a meetupController", function() {
 		expect(ctrl).toBeDefined();
 		expect(scope.addMeetup).toBeDefined();
+		expect(scope.meetups).toBeDefined();
 		expect(scope.name).toBeDefined();
 	});
 
@@ -47,7 +51,7 @@ describe("Meetup App", function() {
 
 	describe("Adding a Meetup", function() {
 		beforeEach(function() {
-			scope.addMeetup("something");
+			scope.addMeetup("anything");
 		});
 
 		it("should add the new meetup to the local list", function() {
@@ -56,6 +60,7 @@ describe("Meetup App", function() {
 
 		it("should add the new meetup to the server", function(){
 			expect(mockServer.add_was_called).toEqual(1);
+			expect(mockServer.add_was_called_with.name).toEqual("anything");
 		});
 	});
 });

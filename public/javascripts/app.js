@@ -13,7 +13,6 @@ meetup.factory('MeetupServer', [ '$resource', function($resource) {
 		},
 		add: function(meetup) { meetups.push(meetup) } 
 	};
-
  }]);
 
 meetup.controller('meetupController',["$scope", "MeetupServer", function($scope, MeetupServer){
