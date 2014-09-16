@@ -20,7 +20,7 @@ describe("A working test environment", function() {
 	});
 });
 
-describe("Meetup App", function() {
+describe("Meetup Controller", function() {
 	var crtl, scope, mockServer;
 
 	beforeEach(function(){
