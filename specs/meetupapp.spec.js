@@ -2,7 +2,7 @@ var meetupAppMock = angular.module("MeetupAppMock",[]);
 
 meetupAppMock.factory('MeetupServer', function() {
 	return {
-			list: function() { this.list_was_called++; return []; },
+			list: function() { this.list_was_called++; return {success:function(){}}; },
 			add: function(meetup) { this.add_was_called++;
 				this.add_was_called_with = meetup; },
 			list_was_called: 0,

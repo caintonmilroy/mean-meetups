@@ -5,7 +5,6 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
@@ -33,8 +32,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+var api = require('./routes/api');
+
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/api/meetups', api.list);
+app.post('/api/meetup', api.add);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

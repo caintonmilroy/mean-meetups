@@ -1,29 +1,34 @@
-var meetup = angular.module('MeetupApp', ['ngResource', 'ngRoute']);
+var meetup = angular.module('MeetupApp', []);
 
-meetup.factory('MeetupServer', [ '$resource', function($resource) {	
-	var meetups =  [{name:"Cainton"}, {name:"Milroy"}];
+meetup.factory('MeetupServer', [ '$http', function($http) {	
+
+	function errorLogger(data, status) { console.log(status, data); }
 
 	return { 
 		list: function() { 
-			var meetups_copy = [];
-			for ( var i = 0; i < meetups.length; i++) {
-				meetups_copy.push( meetups[i] );
-			}
-			return meetups_copy; 
+			return $http.get('/api/meetups').error(errorLogger);
 		},
-		add: function(meetup) { meetups.push(meetup) } 
+		add: function(meetup) { 
+			return $http.post('/api/meetup', meetup).error(errorLogger);
+		} 
 	};
  }]);
 
 meetup.controller('meetupController',["$scope", "MeetupServer", function($scope, MeetupServer){
-	$scope.meetups = MeetupServer.list();
+	$scope.meetups = [];
+
+	MeetupServer.list()
+		.success(function(data) {
+			console.log(data);
+			$scope.meetups = data;
+		});
 
 	$scope.addMeetup = function(the_name){
 		if(the_name){
 			var meetup = {name: the_name};
-			$scope.meetups.push(meetup);
-			MeetupServer.add(meetup);
+			$scope.meetups.push(meetup);			
 			$scope.name = "";
+			MeetupServer.add(meetup);
 		}
 	};
 }]);
