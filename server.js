@@ -32,13 +32,19 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var api = require('./routes/api');
-
 app.get('/', routes.index);
+
+var api = require('./routes/api');
 app.get('/api/meetups', api.list);
 app.post('/api/meetup', api.add);
 
+var db = require('./db');
+db.start(mongoose, startServer);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+
+
+function startServer() {
+	http.createServer(app).listen(app.get('port'), function(){
+	  console.log('Express server listening on port ' + app.get('port'));
+	});
+}

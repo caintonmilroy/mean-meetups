@@ -1,12 +1,19 @@
-var meetups = [{name:"Wellington Java"}, {name:"Vanuatu Mongo DB Guys"}];
+var mongoose = require('mongoose');
+
+// var meetups = [{name:"Wellington Java"}, {name:"Vanuatu Mongo DB Guys"}];
 
 exports.list = function(req, res) {
-	res.send(200, meetups);
+	var Meetup = mongoose.model('Meetup');
+	Meetup.find({}, function(err, meetups) {
+		console.log(meetups);
+		res.send(200, meetups);	
+	});
 };
 
 exports.add = function(req, res) {
-	console.log(req.body);
-	var new_meetup = req.body;
-	meetups.push(new_meetup);
-	res.send(201);
+	var Meetup = mongoose.model('Meetup');
+	var a_new_meetup = new Meetup(req.body);
+	a_new_meetup.save(function(){
+		res.send(201);
+	});
 };
