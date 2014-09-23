@@ -1,4 +1,4 @@
-div(ng-repeat="meetup in meetups track by meetup.name", class="meetup")
+div(ng-repeat="meetup in meetups track by meetup.name", ng-controller="meetupItemController", class="meetup")
   div
     img(src="{{meetup.logo_url}}")
     h1 {{meetup.name}}
@@ -7,4 +7,9 @@ div(ng-repeat="meetup in meetups track by meetup.name", class="meetup")
     li Max Attendees: {{meetup.max_attendees}}
     li Signup Required? {{meetup.status}}
     li Organiser: {{meetup.organiser.name}} : {{meetup.organiser.email}}
-    li Attendees: {{meetup.attendees}}
+    li Attendee emails: {{meetup.attendees}}
+  div
+    h3 Sign Up!
+    form(name="signup_form", ng-submit="signup()")
+      input(type="email", ng-model="signup_email", required, placeholder="email address")
+      input(type="submit", value="Sign Up")
