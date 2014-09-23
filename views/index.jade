@@ -2,8 +2,7 @@ extends layout
 
 block content
   div(ng-app="MeetupApp", ng-controller="meetupController")
-    ul
-      li(ng-repeat="meetup in meetups track by meetup.name") {{meetup.name}}
+    include meetup
     form(name="form" ng-submit="addMeetup()")
       input(type="entry", ng-model="new_meetup.name", required placeholder="Enter a meetup name")
       br
@@ -17,5 +16,7 @@ block content
       input(type="entry", ng-model="new_meetup.organiser.name",  required, placeholder="Organiser Name")
       br
       input(type="email", ng-model="new_meetup.organiser.email", require, placeholder="Organiser Email")
+      br
+      input(type="url", ng-model="new_meetup.logo_url", placeholder="Url to your logo")
       br
       input(type="submit", value ="Add a meetup")

@@ -1,0 +1,10 @@
+div(ng-repeat="meetup in meetups track by meetup.name", class="meetup")
+  div
+    img(src="{{meetup.logo_url}}")
+    h1 {{meetup.name}}
+  ul
+    li When: {{meetup.date | date:'dd MMMM yy, h:mm a' }}
+    li Max Attendees: {{meetup.max_attendees}}
+    li Signup Required? {{meetup.status}}
+    li Organiser: {{meetup.organiser.name}} : {{meetup.organiser.email}}
+    li Attendees: {{meetup.attendees}}

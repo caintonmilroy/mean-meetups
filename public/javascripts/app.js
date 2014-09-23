@@ -17,7 +17,7 @@ meetup.factory('MeetupServer', [ '$http', function($http) {
 function meetupObj() {
 	return {
 		name: "",
-		logo_url: "",
+		logo_url: "https://lh5.googleusercontent.com/-Zopx8M9odmQ/AAAAAAAAAAI/AAAAAAAAANE/ocRl5i14Enk/s120-c/photo.jpg",
 		date: "",
 		max_attendees: 0,
 		status: true,

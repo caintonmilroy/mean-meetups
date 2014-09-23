@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+.meetup {
+	border: solid 1px black;
+	margin: 5px;
+	padding: 5px;
+}
+
+.meetup img {
+	float:left;
+	width: 30px;
+	height: 30px;
+	margin-right: 5px;
+}
+
+.meetup ul {
+	list-style-type: none;
+}
