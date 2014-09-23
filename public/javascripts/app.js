@@ -14,7 +14,20 @@ meetup.factory('MeetupServer', [ '$http', function($http) {
 	};
  }]);
 
+function meetupObj() {
+	return {
+		name: "",
+		logo_url: "",
+		date: "",
+		max_attendees: 0,
+		status: true,
+		organiser: { name: "", email: "" },
+		attendees: []				
+	};
+};
+
 meetup.controller('meetupController',["$scope", "MeetupServer", function($scope, MeetupServer){
+	$scope.new_meetup = meetupObj();
 	$scope.meetups = [];
 
 	MeetupServer.list()
@@ -23,12 +36,12 @@ meetup.controller('meetupController',["$scope", "MeetupServer", function($scope,
 			$scope.meetups = data;
 		});
 
-	$scope.addMeetup = function(the_name){
-		if(the_name){
-			var meetup = {name: the_name};
-			$scope.meetups.push(meetup);			
-			$scope.name = "";
-			MeetupServer.add(meetup);
+	$scope.addMeetup = function(){
+		if($scope.new_meetup.name){
+			$scope.meetups.push($scope.new_meetup);			
+			MeetupServer.add($scope.new_meetup);
+			$scope.form.$setPristine();
+			$scope.new_meetup = meetupObj();
 		}
 	};
 }]);

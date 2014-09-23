@@ -33,6 +33,12 @@ describe("Meetup Controller", function() {
 
 		inject(function($controller, $rootScope) {
 			scope = $rootScope.$new;
+
+			scope.form = {
+				was_called: 0,
+				$setPristine: function() { this.was_called++;}
+			};
+
 			ctrl = $controller('meetupController', 
 				{$scope: scope, "MeetupServer": mockServer});
 		});
@@ -51,7 +57,10 @@ describe("Meetup Controller", function() {
 
 	describe("Adding a Meetup", function() {
 		beforeEach(function() {
-			scope.addMeetup("anything");
+			scope.new_meetup = meetupObj();
+			scope.new_meetup.name = "required";
+			scope.new_meetup.max_attendees = 20;			
+			scope.addMeetup();
 		});
 
 		it("should add the new meetup to the local list", function() {
@@ -60,7 +69,17 @@ describe("Meetup Controller", function() {
 
 		it("should add the new meetup to the server", function(){
 			expect(mockServer.add_was_called).toEqual(1);
-			expect(mockServer.add_was_called_with.name).toEqual("anything");
+			expect(mockServer.add_was_called_with.name).toEqual("required");
+			expect(mockServer.add_was_called_with.max_attendees).toEqual(20);
+		});
+
+		it("should reset the form data", function() {
+			expect(scope.new_meetup.name).toBe("");
+			expect(scope.new_meetup.max_attendees).toBe(0);
+		});
+
+		it("should mark the form as Pristine", function() {
+			expect(scope.form.was_called).toEqual(1);
 		});
 	});
 });

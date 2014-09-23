@@ -4,6 +4,18 @@ block content
   div(ng-app="MeetupApp", ng-controller="meetupController")
     ul
       li(ng-repeat="meetup in meetups track by meetup.name") {{meetup.name}}
-    form(ng-submit="addMeetup(name)")
-      input(type="entry", ng-model="name", required placeholder="Enter a meetup name")
+    form(name="form" ng-submit="addMeetup()")
+      input(type="entry", ng-model="new_meetup.name", required placeholder="Enter a meetup name")
+      br
+      input(type="datetime-local", ng-model="new_meetup.date", required)
+      br
+      input(type="number" ng-model="new_meetup.max_attendees", required, placeholder="Max Attendees")
+      br
+      input(type="checkbox", ng-model="new_meetup.status" value="status")
+      span signup required
+      br
+      input(type="entry", ng-model="new_meetup.organiser.name",  required, placeholder="Organiser Name")
+      br
+      input(type="email", ng-model="new_meetup.organiser.email", require, placeholder="Organiser Email")
+      br
       input(type="submit", value ="Add a meetup")
