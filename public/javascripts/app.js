@@ -28,7 +28,6 @@ function meetupObj() {
 
 meetup.controller('meetupItemController', ["$scope", function($scope) {
 	$scope.signup = function() {
-		console.log($scope);
 		if($scope.signup_email) {			
 			$scope.meetups[$scope.$index].attendees.push($scope.signup_email);
 			//MeetupServer.update($scope.meetups[index]);
